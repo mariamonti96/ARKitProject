@@ -3,6 +3,7 @@
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
+[Uu]nity-arkit-plugin/
 Assets/AssetStoreTools*
 
 # Visual Studio cache directory
