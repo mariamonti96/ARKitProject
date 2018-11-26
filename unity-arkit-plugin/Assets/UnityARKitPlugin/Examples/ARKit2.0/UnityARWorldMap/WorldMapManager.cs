@@ -22,7 +22,7 @@ public class WorldMapManager : MonoBehaviour
         UnityARSessionNativeInterface.ARFrameUpdatedEvent += OnFrameUpdate;
         pathText = FindObjectOfType<InputField>();
 
-        Debug.Log("pathText.Text = " + pathText.text);
+        Debug.Log("pathText.text = " + pathText.text);
     }
 
     ARTrackingStateReason m_LastReason;
