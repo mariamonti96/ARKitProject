@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.iOS;
+using UnityEngine.UI;
 
 public class WorldMapManager : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class WorldMapManager : MonoBehaviour
         UnityARSessionNativeInterface.ARFrameUpdatedEvent += OnFrameUpdate;
         pathText = FindObjectOfType<InputField>();
 
-        Debug.Log("pathText.Text = " + pathText.Text);
+        Debug.Log("pathText.Text = " + pathText.text);
     }
 
     ARTrackingStateReason m_LastReason;
@@ -49,7 +50,7 @@ public class WorldMapManager : MonoBehaviour
 
      string path
     {
-        get { return Path.Combine(Application.persistentDataPath, )}
+        get { return Path.Combine(Application.persistentDataPath, pathText.text); }
     }
 
 
