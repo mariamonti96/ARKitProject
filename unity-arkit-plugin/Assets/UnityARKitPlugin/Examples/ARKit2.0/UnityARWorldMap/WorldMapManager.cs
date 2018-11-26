@@ -15,14 +15,13 @@ public class WorldMapManager : MonoBehaviour
 	serializableARWorldMap serializedWorldMap;
 
     InputField pathText;
+    string path;
 
     // Use this for initialization
     void Start ()
     {
         UnityARSessionNativeInterface.ARFrameUpdatedEvent += OnFrameUpdate;
         pathText = FindObjectOfType<InputField>();
-
-        Debug.Log("pathText.text = " + pathText.text);
     }
 
     ARTrackingStateReason m_LastReason;
@@ -48,10 +47,10 @@ public class WorldMapManager : MonoBehaviour
     //    get { return Path.Combine(Application.persistentDataPath, "myFirstWorldMap.worldmap"); }
     //}
 
-     string path
-    {
-        get { return Path.Combine(Application.persistentDataPath, pathText.text); }
-    }
+    // string path
+    //{
+    //    get { return Path.Combine(Application.persistentDataPath, pathText.text); }
+    //}
 
 
 
@@ -59,6 +58,8 @@ public class WorldMapManager : MonoBehaviour
     {
         if (worldMap != null)
         {
+            path = Path.Combine(Application.persistentDataPath, pathText.text);
+            Debug.Log("PATH = " + pathText.text);
             worldMap.Save(path);
             Debug.LogFormat("ARWorldMap saved to {0}", path);
         }
