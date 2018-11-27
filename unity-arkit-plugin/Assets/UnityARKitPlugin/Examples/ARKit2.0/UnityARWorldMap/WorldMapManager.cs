@@ -65,9 +65,16 @@ public class WorldMapManager : MonoBehaviour
     {
         if (worldMap != null)
         {
-            
-            worldMap.Save(path);
-            Debug.LogFormat("ARWorldMap saved to {0}", path);
+            if (path != null)
+            {
+                worldMap.Save(path);
+                Debug.LogFormat("ARWorldMap saved to {0}", path);
+            }
+            else
+            {
+                Debug.Log("Please, specify a path");
+                
+            }
         }
     }
 
@@ -78,22 +85,30 @@ public class WorldMapManager : MonoBehaviour
 
     public void Load()
     {
-        Debug.LogFormat("Loading ARWorldMap {0}", path);
-        var worldMap = ARWorldMap.Load(path);
-        if (worldMap != null)
+        if (path != null)
         {
-            m_LoadedMap = worldMap;
-            Debug.LogFormat("Map loaded. Center: {0} Extent: {1}", worldMap.center, worldMap.extent);
+            Debug.LogFormat("Loading ARWorldMap {0}", path);
+            var worldMap = ARWorldMap.Load(path);
+            if (worldMap != null)
+            {
+                m_LoadedMap = worldMap;
+                Debug.LogFormat("Map loaded. Center: {0} Extent: {1}", worldMap.center, worldMap.extent);
 
-            UnityARSessionNativeInterface.ARSessionShouldAttemptRelocalization = true;
+                UnityARSessionNativeInterface.ARSessionShouldAttemptRelocalization = true;
 
-            var config = m_ARCameraManager.sessionConfiguration;
-            config.worldMap = worldMap;
-			UnityARSessionRunOption runOption = UnityARSessionRunOption.ARSessionRunOptionRemoveExistingAnchors | UnityARSessionRunOption.ARSessionRunOptionResetTracking;
+                var config = m_ARCameraManager.sessionConfiguration;
+                config.worldMap = worldMap;
+                UnityARSessionRunOption runOption = UnityARSessionRunOption.ARSessionRunOptionRemoveExistingAnchors | UnityARSessionRunOption.ARSessionRunOptionResetTracking;
 
-			Debug.Log("Restarting session with worldMap");
-			session.RunWithConfigAndOptions(config, runOption);
+                Debug.Log("Restarting session with worldMap");
+                session.RunWithConfigAndOptions(config, runOption);
 
+            }
+        }
+        else
+        {
+            Debug.Log("Please, specify a path");
+        
         }
     }
 
