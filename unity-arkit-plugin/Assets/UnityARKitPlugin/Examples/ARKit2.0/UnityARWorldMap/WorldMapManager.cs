@@ -22,6 +22,8 @@ public class WorldMapManager : MonoBehaviour
     {
         UnityARSessionNativeInterface.ARFrameUpdatedEvent += OnFrameUpdate;
         pathText = FindObjectOfType<InputField>();
+
+        pathText.onEndEdit.AddListener(SetPath);
     }
 
     ARTrackingStateReason m_LastReason;
@@ -52,14 +54,18 @@ public class WorldMapManager : MonoBehaviour
     //    get { return Path.Combine(Application.persistentDataPath, pathText.text); }
     //}
 
-
+    void SetPath(string arg0)
+    {
+        path = Path.Combine(Application.persistentDataPath, pathText.text);
+        Debug.Log("PATH = " + path);
+    }
+    
 
     void OnWorldMap(ARWorldMap worldMap)
     {
         if (worldMap != null)
         {
-            path = Path.Combine(Application.persistentDataPath, pathText.text);
-            Debug.Log("PATH = " + pathText.text);
+            
             worldMap.Save(path);
             Debug.LogFormat("ARWorldMap saved to {0}", path);
         }
