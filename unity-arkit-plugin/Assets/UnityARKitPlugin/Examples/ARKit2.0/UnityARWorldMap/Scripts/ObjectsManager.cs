@@ -10,7 +10,8 @@ namespace UnityEngine.XR.iOS
         public enum ObjectMode
         {
             TGO,
-            NOTHING
+            NOTHING,
+            ESA
         }
 
         #region PUBLIC_MEMBERS
@@ -27,6 +28,7 @@ namespace UnityEngine.XR.iOS
 
         #region PRIVATE_MEMBERS
         ObjectPlacement m_ObjectPlacement;
+        TGOPlacement m_ESAPlacement;
 
         ARKitProjectUI m_ARKitProjectUI;
 
@@ -39,6 +41,7 @@ namespace UnityEngine.XR.iOS
         void Start()
         {
             m_ObjectPlacement = FindObjectOfType<ObjectPlacement>();
+            m_ESAPlacement = FindObjectOfType<TGOPlacement>();
             m_ARKitProjectUI = FindObjectOfType<ARKitProjectUI>();
 
         }
@@ -116,15 +119,19 @@ namespace UnityEngine.XR.iOS
                     //m_HitTransform.position = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
                     //m_HitTransform.rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
                     //Debug.Log(string.Format("x:{0:0.######} y:{1:0.######} z:{2:0.######", m_HitTransform.position.x, m_HitTransform.position.y, m_HitTransform.position.z));
-
+                    var position = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
+                    var rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
                     switch (objectMode)
                     {
                         case ObjectMode.TGO:
-                            var position = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
-                            var rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
+                            
                             m_ObjectPlacement.placeObject(position, rotation);
                             break;
 
+                        case ObjectMode.ESA:
+                            m_ESAPlacement.placeObject(position, rotation);
+                            break;
+                            
                     }
                     return true;
                     
@@ -143,6 +150,15 @@ namespace UnityEngine.XR.iOS
                 Debug.Log("Setting Object Mode To TGO");
                 objectMode = ObjectMode.TGO;
                 //something else? 
+            }
+        }
+
+        public void SetESAMode(bool active)
+        {
+            if (active)
+            {
+                Debug.Log("Setting Object Mode to TGO");
+                objectMode = ObjectMode.ESA;
             }
         }
 

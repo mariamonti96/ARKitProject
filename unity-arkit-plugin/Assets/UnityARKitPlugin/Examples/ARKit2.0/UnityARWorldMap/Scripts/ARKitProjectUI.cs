@@ -10,6 +10,7 @@ public class ARKitProjectUI : MonoBehaviour
     #region PUBLIC_MEMBERS
     [Header("UI Buttons")]
     public Toggle m_TGOToggle;
+    public Toggle m_ESAToggle;
 
     #endregion //PUBLIC_MEMBERS
 
@@ -23,6 +24,9 @@ public class ARKitProjectUI : MonoBehaviour
     {
         m_TGOToggle.interactable = true;
         m_TGOToggle.isOn = false;
+
+        m_ESAToggle.interactable = true;
+        m_ESAToggle.isOn = false;
     }
 
     // Update is called once per frame
