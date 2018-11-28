@@ -9,7 +9,8 @@ namespace UnityEngine.XR.iOS
 
         public enum ObjectMode
         {
-            TGO
+            TGO,
+            NOTHING
         }
 
         #region PUBLIC_MEMBERS
@@ -20,7 +21,7 @@ namespace UnityEngine.XR.iOS
 
         [Header("Objects augmentations")]
         public GameObject m_TGOAugmentation;
-        public static ObjectMode objectMode = ObjectMode.TGO;
+        public static ObjectMode objectMode = ObjectMode.NOTHING;
 
         #endregion //PUBLIC_MEMBERS
 
