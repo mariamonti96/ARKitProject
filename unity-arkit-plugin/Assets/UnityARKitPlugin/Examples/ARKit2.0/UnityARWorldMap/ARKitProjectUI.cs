@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ARKitProjectUI : MonoBehaviour {
+public class ARKitProjectUI : MonoBehaviour
+{
 
     #region PUBLIC_MEMBERS
     [Header("UI Buttons")]
@@ -18,16 +19,19 @@ public class ARKitProjectUI : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
-        m_TGOToggle.interactable = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	    // When to enable the toggle?
+    void Start()
+    {
+        m_TGOToggle.interactable = true;
+        m_TGOToggle.isOn = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // When to enable the toggle?
 
         //Check if ObjectPlacement.isPlaced is true. If it is then enable the reset button.
-	}
+    }
 
     #region PUBLIC_METHODS
     public void Reset()
@@ -38,14 +42,14 @@ public class ARKitProjectUI : MonoBehaviour {
         //When reset button is clicked!!
 
     }
-    
+
     public bool InitializeUI()
     {
         m_TGOToggle.interactable = true;
 
         //Should you turn the toggle on? Which one? 
         m_TGOToggle.isOn = true;
-        return true; 
+        return true;
     }
 
     //maybe add "public bool IsCanvasButtonPressed" to make sure that the objects are not moved when pressing a canvas button?
