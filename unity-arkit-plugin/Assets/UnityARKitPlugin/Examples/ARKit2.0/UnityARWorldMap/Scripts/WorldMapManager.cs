@@ -103,9 +103,9 @@ public class WorldMapManager : MonoBehaviour
                 var config = m_ARCameraManager.sessionConfiguration;
                 config.worldMap = worldMap;
                 UnityARSessionRunOption runOption = UnityARSessionRunOption.ARSessionRunOptionRemoveExistingAnchors | UnityARSessionRunOption.ARSessionRunOptionResetTracking;
-                m_TGOPlacement.Reset();
-                m_ESAPlacement.Reset();
-               
+                //m_TGOPlacement.Reset();
+                //m_ESAPlacement.Reset();
+                
                 Debug.Log("Restarting session with worldMap");
                 session.RunWithConfigAndOptions(config, runOption);
 
