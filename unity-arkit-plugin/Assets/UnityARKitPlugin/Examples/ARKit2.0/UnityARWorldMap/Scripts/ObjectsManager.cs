@@ -22,7 +22,7 @@ namespace UnityEngine.XR.iOS
 
         [Header("Objects augmentations")]
         public GameObject m_TGOAugmentation;
-        public static ObjectMode objectMode = ObjectMode.NOTHING;
+        public static ObjectMode objectMode = ObjectMode.TGO;
 
         #endregion //PUBLIC_MEMBERS
 
@@ -149,6 +149,7 @@ namespace UnityEngine.XR.iOS
             {
                 Debug.Log("Setting Object Mode To TGO");
                 objectMode = ObjectMode.TGO;
+                m_ARKitProjectUI.m_ESAToggle.isOn = false;
                 //something else? 
             }
         }
@@ -159,6 +160,7 @@ namespace UnityEngine.XR.iOS
             {
                 Debug.Log("Setting Object Mode to TGO");
                 objectMode = ObjectMode.ESA;
+                m_ARKitProjectUI.m_TGOToggle.isOn = false;
             }
         }
 

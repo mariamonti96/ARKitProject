@@ -23,7 +23,7 @@ public class ARKitProjectUI : MonoBehaviour
     void Start()
     {
         m_TGOToggle.interactable = true;
-        m_TGOToggle.isOn = false;
+        m_TGOToggle.isOn = true;
 
         m_ESAToggle.interactable = true;
         m_ESAToggle.isOn = false;
