@@ -12,7 +12,7 @@ public class TGOPlacement : MonoBehaviour
 
     #region PRIVATE_MEMBERS
     //Material objectMaterial;
-    //MeshRenderer objectRenderer;
+    MeshRenderer objectRenderer;
 
     ARKitProjectUI m_ARKitProjectUI;
 
@@ -23,7 +23,7 @@ public class TGOPlacement : MonoBehaviour
     void Start()
     {
 
-        //objectRenderer = GetComponent<MeshRenderer>();
+        objectRenderer = GetComponent<MeshRenderer>();
         //objectMaterial = Resources.Load<objectMaterial>("defaultMat");
 
         m_ARKitProjectUI = FindObjectOfType<ARKitProjectUI>();
@@ -33,7 +33,7 @@ public class TGOPlacement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //objectRenderer.enabled = IsPlaced;
+        objectRenderer.enabled = IsPlaced;
     }
 
     #endregion //MONOBEHAVIOUR_METHODS

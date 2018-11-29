@@ -27,8 +27,8 @@ namespace UnityEngine.XR.iOS
         #endregion //PUBLIC_MEMBERS
 
         #region PRIVATE_MEMBERS
-        ObjectPlacement m_ObjectPlacement;
-        TGOPlacement m_ESAPlacement;
+        ObjectPlacement m_TGOPlacement;
+        ObjectPlacement m_ESAPlacement;
 
         ARKitProjectUI m_ARKitProjectUI;
 
@@ -40,8 +40,10 @@ namespace UnityEngine.XR.iOS
         // Use this for initialization
         void Start()
         {
-            m_ObjectPlacement = FindObjectOfType<ObjectPlacement>();
-            m_ESAPlacement = FindObjectOfType<TGOPlacement>();
+            //m_ObjectPlacement = FindObjectOfType<ObjectPlacement>();
+            //m_ESAPlacement = FindObjectOfType<TGOPlacement>();
+            m_TGOPlacement = GameObject.Find("TGO/default").GetComponent<ObjectPlacement>();
+            m_ESAPlacement = GameObject.Find("ESA_icon").GetComponent<ObjectPlacement>();
             m_ARKitProjectUI = FindObjectOfType<ARKitProjectUI>();
 
         }
@@ -125,7 +127,7 @@ namespace UnityEngine.XR.iOS
                     {
                         case ObjectMode.TGO:
                             
-                            m_ObjectPlacement.placeObject(position, rotation);
+                            m_TGOPlacement.placeObject(position, rotation);
                             break;
 
                         case ObjectMode.ESA:
