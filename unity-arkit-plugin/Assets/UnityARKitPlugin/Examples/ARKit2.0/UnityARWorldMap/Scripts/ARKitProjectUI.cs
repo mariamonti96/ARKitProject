@@ -78,7 +78,8 @@ public class ARKitProjectUI : MonoBehaviour
         foreach (RaycastResult result in results)
         {
             if (result.gameObject.GetComponentInParent<Toggle>() ||
-                result.gameObject.GetComponent<Button>())
+                result.gameObject.GetComponent<Button>() ||
+                result.gameObject.GetComponent<InputField>())
             {
                 resultIsButton = true;
                 break;
