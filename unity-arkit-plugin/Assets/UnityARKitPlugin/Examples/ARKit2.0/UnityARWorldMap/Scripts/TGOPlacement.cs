@@ -34,6 +34,7 @@ public class TGOPlacement : MonoBehaviour
     void Update()
     {
         objectRenderer.enabled = IsPlaced;
+
     }
 
     #endregion //MONOBEHAVIOUR_METHODS

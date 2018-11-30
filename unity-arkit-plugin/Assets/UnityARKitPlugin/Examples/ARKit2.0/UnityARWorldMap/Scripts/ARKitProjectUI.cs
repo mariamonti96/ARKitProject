@@ -16,7 +16,9 @@ public class ARKitProjectUI : MonoBehaviour
 
     //#region PRIVATE_MEMBERS
     //#endregion //PRIVATE_MEMBERS
-
+    PointerEventData m_PointerEventData;
+    EventSystem m_EventSystem;
+    GraphicRaycaster m_GraphicRaycaster;
 
 
     // Use this for initialization
@@ -27,6 +29,10 @@ public class ARKitProjectUI : MonoBehaviour
 
         m_ESAToggle.interactable = true;
         m_ESAToggle.isOn = false;
+
+        m_EventSystem = FindObjectOfType<EventSystem>();
+        m_GraphicRaycaster = FindObjectOfType<GraphicRaycaster>();
+
     }
 
     // Update is called once per frame
@@ -58,6 +64,28 @@ public class ARKitProjectUI : MonoBehaviour
 
     //maybe add "public bool IsCanvasButtonPressed" to make sure that the objects are not moved when pressing a canvas button?
 
-    #endregion
+    public bool IsCanvasButtonPressed()
+    {
+        m_PointerEventData = new PointerEventData(m_EventSystem)
+        {
+            position = Input.mousePosition
+        };
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        m_GraphicRaycaster.Raycast(m_PointerEventData, results);
+
+        bool resultIsButton = false;
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject.GetComponentInParent<Toggle>() ||
+                result.gameObject.GetComponent<Button>())
+            {
+                resultIsButton = true;
+                break;
+            }
+        }
+        return resultIsButton;
+    }
+    #endregion //PUBLIC_MEMBERS
 
 }

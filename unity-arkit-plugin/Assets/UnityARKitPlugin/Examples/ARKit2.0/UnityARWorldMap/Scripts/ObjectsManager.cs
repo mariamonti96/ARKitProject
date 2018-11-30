@@ -74,16 +74,18 @@ namespace UnityEngine.XR.iOS
                 var touch = Input.GetTouch(0);
                 if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
                 {
-                    var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
-                    ARPoint point = new ARPoint
+                    if (!m_ARKitProjectUI.IsCanvasButtonPressed())
                     {
-                        x = screenPosition.x,
-                        y = screenPosition.y
-                    };
+                        var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
+                        ARPoint point = new ARPoint
+                        {
+                            x = screenPosition.x,
+                            y = screenPosition.y
+                        };
 
-                    //prioritize results types
-                    ARHitTestResultType[] resultTypes =
-                    {
+                        //prioritize results types
+                        ARHitTestResultType[] resultTypes =
+                        {
                         //ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingGeometry,
                         ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent,
                         // if you want to use infinite planes use this:
@@ -93,11 +95,12 @@ namespace UnityEngine.XR.iOS
                         //ARHitTestResultType.ARHitTestResultTypeFeaturePoint
                     };
 
-                    foreach (ARHitTestResultType resultType in resultTypes)
-                        if(HitTestWithResultType(point, resultType))
-                        {
-                            return;
-                        }
+                        foreach (ARHitTestResultType resultType in resultTypes)
+                            if (HitTestWithResultType(point, resultType))
+                            {
+                                return;
+                            }
+                    }
                 }
             }
             #endif
