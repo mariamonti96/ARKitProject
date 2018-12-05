@@ -21,7 +21,7 @@ namespace UnityEngine.XR.iOS
 
 
         [Header("Objects augmentations")]
-        public GameObject m_TGOAugmentation;
+        public GameObject m_ESA_icon_prefab;
         public static ObjectMode objectMode = ObjectMode.TGO;
 
         #endregion //PUBLIC_MEMBERS
@@ -43,9 +43,10 @@ namespace UnityEngine.XR.iOS
             //m_ObjectPlacement = FindObjectOfType<ObjectPlacement>();
             //m_ESAPlacement = FindObjectOfType<TGOPlacement>();
             m_TGOPlacement = GameObject.Find("TGO/default").GetComponent<ObjectPlacement>();
-            m_ESAPlacement = GameObject.Find("ESA_icon").GetComponent<ObjectPlacement>();
+            //m_ESAPlacement = GameObject.Find("ESA_icon").GetComponent<ObjectPlacement>();
+            
             m_ARKitProjectUI = FindObjectOfType<ARKitProjectUI>();
-
+            
         }
 
         // Update is called once per frame
@@ -86,14 +87,14 @@ namespace UnityEngine.XR.iOS
                         //prioritize results types
                         ARHitTestResultType[] resultTypes =
                         {
-                        //ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingGeometry,
-                        ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent,
-                        // if you want to use infinite planes use this:
-                        //ARHitTestResultType.ARHitTestResultTypeExistingPlane,
-                        //ARHitTestResultType.ARHitTestResultTypeEstimatedHorizontalPlane,
-                        //ARHitTestResultType.ARHitTestResultTypeEstimatedVerticalPlane,
-                        //ARHitTestResultType.ARHitTestResultTypeFeaturePoint
-                    };
+                            //ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingGeometry,
+                            ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent,
+                            // if you want to use infinite planes use this:
+                            //ARHitTestResultType.ARHitTestResultTypeExistingPlane,
+                            //ARHitTestResultType.ARHitTestResultTypeEstimatedHorizontalPlane,
+                            //ARHitTestResultType.ARHitTestResultTypeEstimatedVerticalPlane,
+                            //ARHitTestResultType.ARHitTestResultTypeFeaturePoint
+                        };
 
                         foreach (ARHitTestResultType resultType in resultTypes)
                             if (HitTestWithResultType(point, resultType))
@@ -134,6 +135,8 @@ namespace UnityEngine.XR.iOS
                             break;
 
                         case ObjectMode.ESA:
+                            GameObject ESA_icon = (GameObject)Instantiate(ESA_icon_prefab);
+                            m_ESAPlacement = ESA_icon.GetComponent<ObjectPlacement>();
                             m_ESAPlacement.placeObject(position, rotation);
                             break;
                             
@@ -172,7 +175,17 @@ namespace UnityEngine.XR.iOS
         //Add public void ResetScene() and ResetTrackers()?
 
 
-#endregion //PUBLIC_BUTTON_METHODS
+        #endregion //PUBLIC_BUTTON_METHODS
+
+
+        //#region PRIVATE_BUTTON_METHODS
+        //private GameObject SpawnESA_icon()
+        //{
+        //    return (GameObject)Instantiate(ESA_icon_prefab);
+        //}
+
+        //#endregion //PRIVATE_BUTTON_METHODS
+
 
     }
 }
