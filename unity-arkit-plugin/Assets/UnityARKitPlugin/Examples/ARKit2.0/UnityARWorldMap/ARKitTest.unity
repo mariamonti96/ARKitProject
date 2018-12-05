@@ -1915,7 +1915,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 42b6b8d3857fc4c4a9382bac5fe94700, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 42b6b8d3857fc4c4a9382bac5fe94700, type: 3}
       propertyPath: m_LocalScale.x
@@ -3144,7 +3144,7 @@ MonoBehaviour:
   collisionLayer:
     serializedVersion: 2
     m_Bits: 1024
-  ESA_icon_prefab: {fileID: 1725145175721472, guid: eef213d992b01724a960a4805547ff6f,
+  ESA_icon_prefab: {fileID: 1542500072884960, guid: 43dc22977dde96949b27cd1df02bac8f,
     type: 2}
 --- !u!4 &2112599741
 Transform:
