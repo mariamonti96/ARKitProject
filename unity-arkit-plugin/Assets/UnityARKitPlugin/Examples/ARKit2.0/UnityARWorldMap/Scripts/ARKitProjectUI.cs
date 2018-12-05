@@ -18,6 +18,7 @@ public class ARKitProjectUI : MonoBehaviour
     //#region PRIVATE_MEMBERS
     //#endregion //PRIVATE_MEMBERS
     PointerEventData m_PointerEventData;
+    PointerEventData m_PointerEventDataNew;
     EventSystem m_EventSystem;
     GraphicRaycaster m_GraphicRaycaster;
 
@@ -98,14 +99,14 @@ public class ARKitProjectUI : MonoBehaviour
     public GameObject GetGameObjectPressed()
     {
 
-        m_PointerEventData = new PointerEventData(m_EventSystem)
+        m_PointerEventDataNew = new PointerEventData(m_EventSystem)
         {
             position = Input.mousePosition
         };
-        List<RaycastResult> results = new List<RaycastResult>();
-        m_GraphicRaycaster.Raycast(m_PointerEventData, results);
+        List<RaycastResult> resultsNew = new List<RaycastResult>();
+        m_GraphicRaycaster.Raycast(m_PointerEventDataNew, resultsNew);
 
-        foreach (RaycastResult result in results)
+        foreach (RaycastResult result in resultsNew)
         {
             if (result.gameObject.GetComponent<ObjectPlacement>())
             {

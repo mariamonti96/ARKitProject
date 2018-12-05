@@ -113,7 +113,7 @@ namespace UnityEngine.XR.iOS
 #endregion //MONOBEHAVIOUR_METHODS
 
 #region HIT_TEST_METHODS
-        bool HitTestWithResultType(ARPoint point, ARHitTestResultType resultType, GameObject gameObjectDel)
+        bool HitTestWithResultType(ARPoint point, ARHitTestResultType resultType, out GameObject gameObjectDel)
         {
             List<ARHitTestResult> hitResults = UnityARSessionNativeInterface.GetARSessionNativeInterface().HitTest(point, resultTypes);
             if(hitResults.Count > 0)
