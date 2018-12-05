@@ -106,10 +106,13 @@ public class ARKitProjectUI : MonoBehaviour
         {
             if (result.gameObject.GetComponent<ObjectPlacement>())
             {
+                Debug.Log("The Game Object has component ObjectPlacement");
                 return result.gameObject;
                 
             }
+            Debug.Log("The Game Object DOES NOT have component ObjectPlacement");
         }
+        Debug.Log("No RayCastResult list?");
         return null;
     }
 
