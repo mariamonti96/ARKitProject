@@ -78,6 +78,7 @@ namespace UnityEngine.XR.iOS
                 {
                     if (!m_ARKitProjectUI.IsCanvasButtonPressed())
                     {
+                        GameObject gameObjectDel = m_ARKitProjectUI.GetGameObjectPressed();
                         var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
                         ARPoint point = new ARPoint
                         {
@@ -98,7 +99,7 @@ namespace UnityEngine.XR.iOS
                         };
 
                         foreach (ARHitTestResultType resultType in resultTypes)
-                            if (HitTestWithResultType(point, resultType))
+                            if (HitTestWithResultType(point, resultType, gameObjectDel))
                             {
                                 return;
                             }
@@ -112,7 +113,7 @@ namespace UnityEngine.XR.iOS
 #endregion //MONOBEHAVIOUR_METHODS
 
 #region HIT_TEST_METHODS
-        bool HitTestWithResultType(ARPoint point, ARHitTestResultType resultTypes)
+        bool HitTestWithResultType(ARPoint point, ARHitTestResultType resultType, GameObject gameObjectDel)
         {
             List<ARHitTestResult> hitResults = UnityARSessionNativeInterface.GetARSessionNativeInterface().HitTest(point, resultTypes);
             if(hitResults.Count > 0)
@@ -142,7 +143,7 @@ namespace UnityEngine.XR.iOS
                             break;
 
                         case ObjectMode.DEL:
-                            GameObject gameObjectDel = m_ARKitProjectUI.GetGameObjectPressed();
+                            //GameObject gameObjectDel = m_ARKitProjectUI.GetGameObjectPressed();
                             if(gameObjectDel != null)
                             {
                                 Destroy(gameObjectDel);
