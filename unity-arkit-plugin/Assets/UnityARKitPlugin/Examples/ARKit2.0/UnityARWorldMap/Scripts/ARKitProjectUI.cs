@@ -11,6 +11,7 @@ public class ARKitProjectUI : MonoBehaviour
     [Header("UI Buttons")]
     public Toggle m_TGOToggle;
     public Toggle m_ESAToggle;
+    public Toggle m_DELToggle;
 
     #endregion //PUBLIC_MEMBERS
 
@@ -29,6 +30,9 @@ public class ARKitProjectUI : MonoBehaviour
 
         m_ESAToggle.interactable = true;
         m_ESAToggle.isOn = false;
+
+        m_DELToggle.interactable = true;
+        m_DELToggle.isOn = false;
 
         m_EventSystem = FindObjectOfType<EventSystem>();
         m_GraphicRaycaster = FindObjectOfType<GraphicRaycaster>();
@@ -53,14 +57,14 @@ public class ARKitProjectUI : MonoBehaviour
 
     }
 
-    public bool InitializeUI()
-    {
-        m_TGOToggle.interactable = true;
+    //public bool InitializeUI()
+    //{
+    //    m_TGOToggle.interactable = true;
 
-        //Should you turn the toggle on? Which one? 
-        m_TGOToggle.isOn = true;
-        return true;
-    }
+    //    //Should you turn the toggle on? Which one? 
+    //    m_TGOToggle.isOn = true;
+    //    return true;
+    //}
 
     //maybe add "public bool IsCanvasButtonPressed" to make sure that the objects are not moved when pressing a canvas button?
 
@@ -87,6 +91,29 @@ public class ARKitProjectUI : MonoBehaviour
         }
         return resultIsButton;
     }
+
+    public GameObject GetGameObjectPressed()
+    {
+        m_PointerEventData = new PointerEventData(m_EventSystem)
+        {
+            position = Input.mousePosition
+        };
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        m_GraphicRaycaster.Raycast(m_PointerEventData, results);
+
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject.GetComponent<ObjectPlacement>())
+            {
+                return result.gameObject;
+                
+            }
+        }
+        return null;
+    }
+
+    
     #endregion //PUBLIC_MEMBERS
 
 }

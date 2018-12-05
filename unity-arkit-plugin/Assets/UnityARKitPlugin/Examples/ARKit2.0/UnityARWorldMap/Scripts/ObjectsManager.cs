@@ -11,7 +11,8 @@ namespace UnityEngine.XR.iOS
         {
             TGO,
             NOTHING,
-            ESA
+            ESA,
+            DEL
         }
 
         #region PUBLIC_MEMBERS
@@ -139,7 +140,14 @@ namespace UnityEngine.XR.iOS
                             m_ESAPlacement = ESA_icon.GetComponent<ObjectPlacement>();
                             m_ESAPlacement.placeObject(position, rotation);
                             break;
-                            
+
+                        case ObjectMode.DEL:
+                            GameObject gameObjectDel = m_ARKitProjectUI.GetGameObjectPressed();
+                            if(gameObjectDel != null)
+                            {
+                                Destroy(gameObjectDel);
+                            }
+                            break;
                     }
                     return true;
                     
@@ -151,6 +159,10 @@ namespace UnityEngine.XR.iOS
 #endregion //HIT_TEST_METHODS 
        
 #region PUBLIC_BUTTON_METHODS
+
+        //TGOToggle -> TGO Mode
+        //Adds one instance of the TGO spacecraft
+        //in the position the user touched
         public void SetTGOMode(bool active)
         {
             if (active)
@@ -158,10 +170,15 @@ namespace UnityEngine.XR.iOS
                 Debug.Log("Setting Object Mode To TGO");
                 objectMode = ObjectMode.TGO;
                 m_ARKitProjectUI.m_ESAToggle.isOn = false;
+                m_ARKitProjectUI.m_DELToggle.isOn = false;
                 //something else? 
             }
         }
 
+
+        //ESAToggle -> ESA Mode
+        //Adds one instance of the ESA logo in the position
+        //the user touched
         public void SetESAMode(bool active)
         {
             if (active)
@@ -169,9 +186,26 @@ namespace UnityEngine.XR.iOS
                 Debug.Log("Setting Object Mode to TGO");
                 objectMode = ObjectMode.ESA;
                 m_ARKitProjectUI.m_TGOToggle.isOn = false;
+                m_ARKitProjectUI.m_DELToggle.isOn = false;
             }
         }
 
+        //DELToggle -> Delete Mode
+        //Destroys game objects when the user touches them
+        public void SetDELMode(bool active)
+        {
+            if (active)
+            {
+
+                Debug.Log("Setting Object Mode to DEL");
+                objectMode = ObjectMode.DEL;
+                m_ARKitProjectUI.m_TGOToggle.isOn = false;
+                m_ARKitProjectUI.m_ESAToggle.isOn = false;
+
+         
+                
+            }
+        }
         //Add public void ResetScene() and ResetTrackers()?
 
 
