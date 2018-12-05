@@ -21,7 +21,7 @@ namespace UnityEngine.XR.iOS
 
 
         [Header("Objects augmentations")]
-        public GameObject m_ESA_icon_prefab;
+        public GameObject ESA_icon_prefab;
         public static ObjectMode objectMode = ObjectMode.TGO;
 
         #endregion //PUBLIC_MEMBERS

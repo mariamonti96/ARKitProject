@@ -46,6 +46,7 @@ public class ObjectPlacement : MonoBehaviour {
 
     public void placeObject(Vector3 position, Quaternion rotation)
     {
+        
         gameObject.transform.position = position;
         gameObject.transform.rotation = rotation;
         IsPlaced = true;

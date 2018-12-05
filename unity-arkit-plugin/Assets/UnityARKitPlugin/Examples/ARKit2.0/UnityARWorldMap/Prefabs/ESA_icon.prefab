@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 64461928840874694}
   - component: {fileID: 114502078919125392}
   m_Layer: 0
-  m_Name: ESA_icon 1
+  m_Name: ESA_icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
