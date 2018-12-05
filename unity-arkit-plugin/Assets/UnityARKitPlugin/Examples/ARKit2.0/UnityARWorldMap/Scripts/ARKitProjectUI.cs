@@ -86,6 +86,7 @@ public class ARKitProjectUI : MonoBehaviour
                 result.gameObject.GetComponent<InputField>())
             {
                 resultIsButton = true;
+                Debug.Log("This works");
                 break;
             }
         }
