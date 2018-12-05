@@ -3144,7 +3144,7 @@ MonoBehaviour:
   collisionLayer:
     serializedVersion: 2
     m_Bits: 1024
-  ESA_icon_prefab: {fileID: 1527336205051540, guid: 8f7bfba5260e9f545aff8b5abcd73e11,
+  ESA_icon_prefab: {fileID: 1725145175721472, guid: eef213d992b01724a960a4805547ff6f,
     type: 2}
 --- !u!4 &2112599741
 Transform:
