@@ -37,6 +37,8 @@ public class ARKitProjectUI : MonoBehaviour
         m_EventSystem = FindObjectOfType<EventSystem>();
         m_GraphicRaycaster = FindObjectOfType<GraphicRaycaster>();
 
+
+
     }
 
     // Update is called once per frame
@@ -95,11 +97,11 @@ public class ARKitProjectUI : MonoBehaviour
 
     public GameObject GetGameObjectPressed()
     {
+
         m_PointerEventData = new PointerEventData(m_EventSystem)
         {
             position = Input.mousePosition
         };
-
         List<RaycastResult> results = new List<RaycastResult>();
         m_GraphicRaycaster.Raycast(m_PointerEventData, results);
 
@@ -113,7 +115,7 @@ public class ARKitProjectUI : MonoBehaviour
             }
             Debug.Log("The Game Object DOES NOT have component ObjectPlacement");
         }
-        Debug.Log("No RayCastResult list?");
+        //Debug.Log("No RayCastResult list?");
         return null;
     }
 
