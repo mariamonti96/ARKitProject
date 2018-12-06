@@ -89,7 +89,7 @@ public class ARKitProjectUI : MonoBehaviour
                 result.gameObject.GetComponent<InputField>())
             {
                 resultIsButton = true;
-                Debug.Log("This works");
+               
                 break;
             }
         }
@@ -98,28 +98,41 @@ public class ARKitProjectUI : MonoBehaviour
 
     public GameObject GetGameObjectPressed()
     {
-        Debug.Log("I AM INSIDE GET GAMEOBJECT PRESSED");
-        m_PointerEventDataNew = new PointerEventData(m_EventSystem)
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if(Physics.Raycast(ray, out hit, 30))
         {
-            position = Input.mousePosition
-        };
-        List<RaycastResult> resultsNew = new List<RaycastResult>();
-        m_GraphicRaycaster.Raycast(m_PointerEventDataNew, resultsNew);
-
-        Debug.Log("bla" + resultsNew);
-
-        foreach (RaycastResult result in resultsNew)
-        {
-            if (result.gameObject.GetComponent<ObjectPlacement>())
+            if (hit.collider.gameObject.GetComponent<ObjectPlacement>())
             {
-                Debug.Log("The Game Object has component ObjectPlacement");
-                return result.gameObject;
-                
+                Debug.Log("The gameobject has component ObjectPlacement");
+                return hit.collider.gameObject;
             }
-            Debug.Log("The Game Object DOES NOT have component ObjectPlacement");
+            
         }
-        //Debug.Log("No RayCastResult list?");
+        Debug.Log("No ObjectPlacement");
         return null;
+        //Debug.Log("I AM INSIDE GET GAMEOBJECT PRESSED");
+        //m_PointerEventDataNew = new PointerEventData(m_EventSystem)
+        //{
+        //    position = Input.mousePosition
+        //};
+        //List<RaycastResult> resultsNew = new List<RaycastResult>();
+        //m_GraphicRaycaster.Raycast(m_PointerEventDataNew, resultsNew);
+
+        //Debug.Log("bla" + resultsNew);
+
+        //foreach (RaycastResult result in resultsNew)
+        //{
+        //    if (result.gameObject.GetComponent<ObjectPlacement>())
+        //    {
+        //        Debug.Log("The Game Object has component ObjectPlacement");
+        //        return result.gameObject;
+                
+        //    }
+        //    Debug.Log("The Game Object DOES NOT have component ObjectPlacement");
+        //}
+        ////Debug.Log("No RayCastResult list?");
+        //return null;
     }
 
     
