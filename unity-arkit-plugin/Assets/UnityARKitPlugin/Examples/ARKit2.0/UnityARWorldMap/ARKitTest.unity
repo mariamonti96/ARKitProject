@@ -664,6 +664,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 541399955}
+  - {fileID: 1324954672}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1635,7 +1636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1110602779
 Transform:
   m_ObjectHideFlags: 0
@@ -1647,7 +1648,6 @@ Transform:
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 76540083}
-  - {fileID: 1324954672}
   - {fileID: 1559228336}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -2168,11 +2168,11 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1110602779}
+    m_TransformParent: {fileID: 333359236}
     m_Modifications:
     - target: {fileID: 400002, guid: 42b6b8d3857fc4c4a9382bac5fe94700, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 42b6b8d3857fc4c4a9382bac5fe94700, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2184,7 +2184,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 42b6b8d3857fc4c4a9382bac5fe94700, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 42b6b8d3857fc4c4a9382bac5fe94700, type: 3}
       propertyPath: m_LocalRotation.y
@@ -2204,15 +2204,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 42b6b8d3857fc4c4a9382bac5fe94700, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 0.020000001
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 42b6b8d3857fc4c4a9382bac5fe94700, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 0.020000001
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 42b6b8d3857fc4c4a9382bac5fe94700, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.2
+      value: 0.020000001
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 42b6b8d3857fc4c4a9382bac5fe94700, type: 3}
       propertyPath: m_IsActive
@@ -2242,7 +2242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6941ec02ead994c9b848d640887441f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HitTransform: {fileID: 1110602779}
+  m_HitTransform: {fileID: 1324954672}
   maxRayDistance: 30
   collisionLayer:
     serializedVersion: 2
@@ -2607,7 +2607,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1110602779}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1559228337
 MonoBehaviour:
