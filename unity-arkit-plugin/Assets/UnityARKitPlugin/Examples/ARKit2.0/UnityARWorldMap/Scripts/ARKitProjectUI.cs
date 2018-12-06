@@ -98,7 +98,7 @@ public class ARKitProjectUI : MonoBehaviour
 
     public GameObject GetGameObjectPressed()
     {
-
+        Deug.Log("I AM INSIDE GET GAMEOBJECT PRESSED");
         m_PointerEventDataNew = new PointerEventData(m_EventSystem)
         {
             position = Input.mousePosition

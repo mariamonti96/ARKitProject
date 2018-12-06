@@ -78,6 +78,8 @@ namespace UnityEngine.XR.iOS
                 {
                     if (!m_ARKitProjectUI.IsCanvasButtonPressed())
                     {
+
+                        Debug.Log("I am now calling GetGameObjectPressed");
                         GameObject gameObjectDel = m_ARKitProjectUI.GetGameObjectPressed();
                         var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
                         ARPoint point = new ARPoint
