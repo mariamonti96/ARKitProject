@@ -136,15 +136,22 @@ namespace UnityEngine.XR.iOS
                     switch (objectMode)
                     {
                         case ObjectMode.TGO:
-                            GameObject TGO = (GameObject)Instantiate(TGO_prefab);
-                            m_TGOPlacement = TGO.GetComponentInChildren<ObjectPlacement>();
-                            m_TGOPlacement.placeObject(position, rotation);
+                            if (m_ARKitProjectUI.GetGameObjectPressed() == null)
+                            {
+                                GameObject TGO = (GameObject)Instantiate(TGO_prefab);
+                                m_TGOPlacement = TGO.GetComponentInChildren<ObjectPlacement>();
+                                m_TGOPlacement.placeObject(position, rotation);
+                            }
                             break;
 
                         case ObjectMode.ESA:
-                            GameObject ESA_icon = (GameObject)Instantiate(ESA_icon_prefab);
-                            m_ESAPlacement = ESA_icon.GetComponent<ObjectPlacement>();
-                            m_ESAPlacement.placeObject(position, rotation);
+                            
+                            if (m_ARKitProjectUI.GetGameObjectPressed() == null)
+                            {
+                                GameObject ESA_icon = (GameObject)Instantiate(ESA_icon_prefab);
+                                m_ESAPlacement = ESA_icon.GetComponent<ObjectPlacement>();
+                                m_ESAPlacement.placeObject(position, rotation);
+                            }
                             break;
 
                         case ObjectMode.DEL:
