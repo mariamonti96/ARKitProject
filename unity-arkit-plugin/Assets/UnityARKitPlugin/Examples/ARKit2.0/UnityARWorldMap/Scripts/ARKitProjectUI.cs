@@ -106,6 +106,8 @@ public class ARKitProjectUI : MonoBehaviour
         List<RaycastResult> resultsNew = new List<RaycastResult>();
         m_GraphicRaycaster.Raycast(m_PointerEventDataNew, resultsNew);
 
+        Debug.Log("bla" + resultsNew);
+
         foreach (RaycastResult result in resultsNew)
         {
             if (result.gameObject.GetComponent<ObjectPlacement>())
