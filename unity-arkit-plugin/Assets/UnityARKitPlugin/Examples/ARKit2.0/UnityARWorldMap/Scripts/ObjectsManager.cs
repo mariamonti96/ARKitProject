@@ -80,9 +80,6 @@ namespace UnityEngine.XR.iOS
                 {
                     if (!m_ARKitProjectUI.IsCanvasButtonPressed())
                     {
-
-                        Debug.Log("I am now calling GetGameObjectPressed");
-                        //GameObject gameObjectDel = m_ARKitProjectUI.GetGameObjectPressed();
                         var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
                         ARPoint point = new ARPoint
                         {
@@ -128,9 +125,11 @@ namespace UnityEngine.XR.iOS
                     //This was used in the original UnityARHitTestExample,
                     //but we want to have multiple objects placed based on toggles
                     // so we will change it
+                    
                     //m_HitTransform.position = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
                     //m_HitTransform.rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
                     //Debug.Log(string.Format("x:{0:0.######} y:{1:0.######} z:{2:0.######", m_HitTransform.position.x, m_HitTransform.position.y, m_HitTransform.position.z));
+
                     var position = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
                     var rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
                     switch (objectMode)
