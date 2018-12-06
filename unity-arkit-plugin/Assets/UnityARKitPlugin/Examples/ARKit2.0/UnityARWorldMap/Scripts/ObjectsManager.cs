@@ -137,7 +137,7 @@ namespace UnityEngine.XR.iOS
                     {
                         case ObjectMode.TGO:
                             GameObject TGO = (GameObject)Instantiate(TGO_prefab);
-                            m_TGOPlacement = TGO.GetComponent<ObjectPlacement>();
+                            m_TGOPlacement = TGO.GetComponentInChildren<ObjectPlacement>();
                             m_TGOPlacement.placeObject(position, rotation);
                             break;
 
