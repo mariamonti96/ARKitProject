@@ -23,6 +23,7 @@ namespace UnityEngine.XR.iOS
 
         [Header("Objects augmentations")]
         public GameObject ESA_icon_prefab;
+        public GameObject TGO_prefab;
         public static ObjectMode objectMode = ObjectMode.TGO;
 
         #endregion //PUBLIC_MEMBERS
@@ -43,7 +44,7 @@ namespace UnityEngine.XR.iOS
         {
             //m_ObjectPlacement = FindObjectOfType<ObjectPlacement>();
             //m_ESAPlacement = FindObjectOfType<TGOPlacement>();
-            m_TGOPlacement = GameObject.Find("TGO/default").GetComponent<ObjectPlacement>();
+            //m_TGOPlacement = GameObject.Find("TGO/default").GetComponent<ObjectPlacement>();
             //m_ESAPlacement = GameObject.Find("ESA_icon").GetComponent<ObjectPlacement>();
             
             m_ARKitProjectUI = FindObjectOfType<ARKitProjectUI>();
@@ -71,7 +72,8 @@ namespace UnityEngine.XR.iOS
                 }
             }
             #else
-            if(Input.touchCount >0 && m_HitTransform != null)
+            //if(Input.touchCount >0 && m_HitTransform != null)
+            if(Input.touchCount >0)
             {
                 var touch = Input.GetTouch(0);
                 if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
@@ -80,7 +82,7 @@ namespace UnityEngine.XR.iOS
                     {
 
                         Debug.Log("I am now calling GetGameObjectPressed");
-                        GameObject gameObjectDel = m_ARKitProjectUI.GetGameObjectPressed();
+                        //GameObject gameObjectDel = m_ARKitProjectUI.GetGameObjectPressed();
                         var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
                         ARPoint point = new ARPoint
                         {
@@ -101,7 +103,7 @@ namespace UnityEngine.XR.iOS
                         };
 
                         foreach (ARHitTestResultType resultType in resultTypes)
-                            if (HitTestWithResultType(point, resultType, ref gameObjectDel))
+                            if (HitTestWithResultType(point, resultType))
                             {
                                 return;
                             }
@@ -115,7 +117,7 @@ namespace UnityEngine.XR.iOS
 #endregion //MONOBEHAVIOUR_METHODS
 
 #region HIT_TEST_METHODS
-        bool HitTestWithResultType(ARPoint point, ARHitTestResultType resultType, ref GameObject gameObjectDel)
+        bool HitTestWithResultType(ARPoint point, ARHitTestResultType resultType)
         {
             List<ARHitTestResult> hitResults = UnityARSessionNativeInterface.GetARSessionNativeInterface().HitTest(point, resultType);
             if(hitResults.Count > 0)
@@ -134,7 +136,8 @@ namespace UnityEngine.XR.iOS
                     switch (objectMode)
                     {
                         case ObjectMode.TGO:
-                            
+                            GameObject TGO = (GameObject)Instantiate(TGO_prefab);
+                            m_TGOPlacement = TGO.GetComponent<ObjectPlacement>();
                             m_TGOPlacement.placeObject(position, rotation);
                             break;
 
@@ -145,7 +148,7 @@ namespace UnityEngine.XR.iOS
                             break;
 
                         case ObjectMode.DEL:
-                            //GameObject gameObjectDel = m_ARKitProjectUI.GetGameObjectPressed();
+                            GameObject gameObjectDel = m_ARKitProjectUI.GetGameObjectPressed();
                             if(gameObjectDel != null)
                             {
                                 Destroy(gameObjectDel);
