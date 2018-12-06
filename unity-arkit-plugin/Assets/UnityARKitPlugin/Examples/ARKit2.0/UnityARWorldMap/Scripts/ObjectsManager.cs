@@ -101,7 +101,7 @@ namespace UnityEngine.XR.iOS
                         };
 
                         foreach (ARHitTestResultType resultType in resultTypes)
-                            if (HitTestWithResultType(point, resultType, out gameObjectDel))
+                            if (HitTestWithResultType(point, resultType, ref gameObjectDel))
                             {
                                 return;
                             }
@@ -115,7 +115,7 @@ namespace UnityEngine.XR.iOS
 #endregion //MONOBEHAVIOUR_METHODS
 
 #region HIT_TEST_METHODS
-        bool HitTestWithResultType(ARPoint point, ARHitTestResultType resultType, out GameObject gameObjectDel)
+        bool HitTestWithResultType(ARPoint point, ARHitTestResultType resultType, ref GameObject gameObjectDel)
         {
             List<ARHitTestResult> hitResults = UnityARSessionNativeInterface.GetARSessionNativeInterface().HitTest(point, resultType);
             if(hitResults.Count > 0)
