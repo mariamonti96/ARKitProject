@@ -102,7 +102,7 @@ public class ARKitProjectUI : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit, 30))
         {
-            if (hit.collider.gameObject.GetComponent<ObjectPlacement>())
+            if (hit.collider.gameObject.GetComponent<ObjectPlacement>() || hit.collider.gameObject.GetComponentInChildren<ObjectPlacement>())
             {
                 Debug.Log("The gameobject has component ObjectPlacement");
                 return hit.collider.gameObject;
