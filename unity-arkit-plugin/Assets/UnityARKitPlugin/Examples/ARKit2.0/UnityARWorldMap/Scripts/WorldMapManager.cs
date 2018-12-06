@@ -27,7 +27,7 @@ public class WorldMapManager : MonoBehaviour
         pathText.onEndEdit.AddListener(SetPath);
 
         m_TGOPlacement = GameObject.Find("TGO/default").GetComponent<ObjectPlacement>();
-        m_ESAPlacement = GameObject.Find("ESA_icon").GetComponent<ObjectPlacement>();
+        //m_ESAPlacement = GameObject.Find("ESA_icon").GetComponent<ObjectPlacement>();
     }
 
     ARTrackingStateReason m_LastReason;
