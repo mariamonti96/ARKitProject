@@ -9,9 +9,10 @@ public class ARKitProjectUI : MonoBehaviour
 
     #region PUBLIC_MEMBERS
     [Header("UI Buttons")]
-    public Toggle m_TGOToggle;
-    public Toggle m_ESAToggle;
+    public Toggle m_INVToggle;
     public Toggle m_DELToggle;
+    public Toggle m_OB1Toggle;
+    public Toggle m_OB2Toggle;
 
     #endregion //PUBLIC_MEMBERS
 
@@ -26,14 +27,17 @@ public class ARKitProjectUI : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        m_TGOToggle.interactable = true;
-        m_TGOToggle.isOn = true;
+        m_OB1Toggle.interactable = true;
+        m_OB1Toggle.isOn = true;
 
-        m_ESAToggle.interactable = true;
-        m_ESAToggle.isOn = false;
+        m_INVToggle.interactable = true;
+        m_INVToggle.isOn = false;
 
         m_DELToggle.interactable = true;
         m_DELToggle.isOn = false;
+
+        m_OB2Toggle.interactable = true;
+        m_OB2Toggle.isOn = false;
 
         m_EventSystem = FindObjectOfType<EventSystem>();
         m_GraphicRaycaster = FindObjectOfType<GraphicRaycaster>();

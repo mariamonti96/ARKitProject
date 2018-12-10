@@ -9,9 +9,10 @@ namespace UnityEngine.XR.iOS
 
         public enum ObjectMode
         {
-            TGO,
-            NOTHING,
-            ESA,
+
+            INV,
+            OB1,
+            OB2,
             DEL
         }
 
@@ -22,15 +23,20 @@ namespace UnityEngine.XR.iOS
 
 
         [Header("Objects augmentations")]
-        public GameObject ESA_icon_prefab;
-        public GameObject TGO_prefab;
-        public static ObjectMode objectMode = ObjectMode.TGO;
+        public GameObject invisibleWall_prefab;
+        public GameObject object1_prefab;
+        public GameObject object2_prefab;
+        public static ObjectMode objectMode = ObjectMode.OB1;
+        public bool object1_duplicate = false;
+        public bool object2_duplicate = false;
 
         #endregion //PUBLIC_MEMBERS
 
         #region PRIVATE_MEMBERS
-        ObjectPlacement m_TGOPlacement;
-        ObjectPlacement m_ESAPlacement;
+        ObjectPlacement m_invisibleWallPlacement;
+        ObjectPlacement m_object1Placement;
+        ObjectPlacement m_object2Placement;
+   
 
         ARKitProjectUI m_ARKitProjectUI;
 
@@ -134,32 +140,82 @@ namespace UnityEngine.XR.iOS
                     var rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
                     switch (objectMode)
                     {
-                        case ObjectMode.TGO:
-                            if (m_ARKitProjectUI.GetGameObjectPressed() == null)
-                            {
-                                GameObject TGO = (GameObject)Instantiate(TGO_prefab);
-                                m_TGOPlacement = TGO.GetComponentInChildren<ObjectPlacement>();
-                                m_TGOPlacement.placeObject(position, rotation);
-                            }
-                            break;
+                        case ObjectMode.INV:
 
-                        case ObjectMode.ESA:
-                            
                             if (m_ARKitProjectUI.GetGameObjectPressed() == null)
                             {
-                                GameObject ESA_icon = (GameObject)Instantiate(ESA_icon_prefab);
-                                m_ESAPlacement = ESA_icon.GetComponent<ObjectPlacement>();
-                                m_ESAPlacement.placeObject(position, rotation);
+                                GameObject invisibleWall = (GameObject)Instantiate(invisibleWall_prefab);
+                                m_invisibleWallPlacement = invisibleWall.GetComponent<ObjectPlacement>();
+                                m_invisibleWallPlacement.placeObject(position, rotation);
                             }
                             break;
 
                         case ObjectMode.DEL:
                             GameObject gameObjectDel = m_ARKitProjectUI.GetGameObjectPressed();
-                            if(gameObjectDel != null)
+                            if (gameObjectDel != null)
                             {
                                 Destroy(gameObjectDel);
                             }
                             break;
+
+                        case ObjectMode.OB1:
+
+                            if (object1_duplicate == true)
+                            {
+
+                                if (m_ARKitProjectUI.GetGameObjectPressed() == null)
+                                {
+                                    GameObject object1 = (GameObject)Instantiate(object1_prefab);
+                                    m_object1Placement = object1.GetComponent<ObjectPlacement>();
+                                    m_object1Placement.placeObject(position, rotation);
+                                }
+                            }
+                            else{
+                                GameObject object1 = GameObject.FindWithTag("object1");
+                                if(object1 == null)
+                                {
+                                    object1 = (GameObject)Instantiate(object1_prefab);
+                                    object1.tag = "object1";
+                                    m_object1Placement = object1.GetComponent<ObjectPlacement>();
+                                    m_object1Placement.placeObject(position, rotation);
+                                }
+                                else{
+                                    m_object1Placement = object1.GetComponent<ObjectPlacement>();
+                                    m_object1Placement.placeObject(position, rotation);
+                                }
+                            }
+
+                           
+                            break;
+
+                        case ObjectMode.OB2:
+
+                            if(object2_duplicate == true){
+                                if(m_ARKitProjectUI.GetGameObjectPressed() == null)
+                                {
+                                    GameObject object2 = (GameObject)Instantiate(object2_prefab);
+                                    m_object2Placement = object2.GetComponent<ObjectPlacement>();
+                                    m_object2Placement.placeObject(position, rotation);
+                                }
+                            }
+                            else{
+                                GameObject object2 = GameObject.FindWithTag("object2");
+                                if(object2 == null)
+                                {
+                                    object2 = (GameObject)Instantiate(object2_prefab);
+                                    object2.tag = "object2";
+                                    m_object2Placement = object2.GetComponent<ObjectPlacement>();
+                                    m_object2Placement.placeObject(position, rotation);
+                                }
+                                else{
+                                    m_object2Placement = object2.GetComponent<ObjectPlacement>();
+                                    m_object2Placement.placeObject(position, rotation);
+                                }
+                            }
+
+                            break;
+
+                        
                     }
                     return true;
                     
@@ -168,37 +224,23 @@ namespace UnityEngine.XR.iOS
             }
             return false;
         }
-#endregion //HIT_TEST_METHODS 
-       
-#region PUBLIC_BUTTON_METHODS
+        #endregion //HIT_TEST_METHODS 
 
-        //TGOToggle -> TGO Mode
-        //Adds one instance of the TGO spacecraft
-        //in the position the user touched
-        public void SetTGOMode(bool active)
-        {
-            if (active)
-            {
-                Debug.Log("Setting Object Mode To TGO");
-                objectMode = ObjectMode.TGO;
-                m_ARKitProjectUI.m_ESAToggle.isOn = false;
-                m_ARKitProjectUI.m_DELToggle.isOn = false;
-                //something else? 
-            }
-        }
-
+        #region PUBLIC_BUTTON_METHODS
 
         //ESAToggle -> ESA Mode
         //Adds one instance of the ESA logo in the position
         //the user touched
-        public void SetESAMode(bool active)
+        public void SetINVMode(bool active)
         {
             if (active)
             {
-                Debug.Log("Setting Object Mode to TGO");
-                objectMode = ObjectMode.ESA;
-                m_ARKitProjectUI.m_TGOToggle.isOn = false;
+                Debug.Log("Setting Object Mode to INV");
+                objectMode = ObjectMode.INV;
                 m_ARKitProjectUI.m_DELToggle.isOn = false;
+                m_ARKitProjectUI.m_OB1Toggle.isOn = false;
+                m_ARKitProjectUI.m_OB2Toggle.isOn = false;
+
             }
         }
 
@@ -211,13 +253,46 @@ namespace UnityEngine.XR.iOS
 
                 Debug.Log("Setting Object Mode to DEL");
                 objectMode = ObjectMode.DEL;
-                m_ARKitProjectUI.m_TGOToggle.isOn = false;
-                m_ARKitProjectUI.m_ESAToggle.isOn = false;
+                m_ARKitProjectUI.m_INVToggle.isOn = false;
+                m_ARKitProjectUI.m_OB1Toggle.isOn = false;
+                m_ARKitProjectUI.m_OB2Toggle.isOn = false;
 
-         
+
+
+
+            }
+        }
+
+        //TGOToggle -> TGO Mode
+        //Adds one instance of the TGO spacecraft
+        //in the position the user touched
+        public void SetOB1Mode(bool active)
+        {
+            if (active)
+            {
+                Debug.Log("Setting Object Mode To TGO");
+                objectMode = ObjectMode.OB1;
+                m_ARKitProjectUI.m_INVToggle.isOn = false;
+                m_ARKitProjectUI.m_DELToggle.isOn = false;
+                m_ARKitProjectUI.m_OB2Toggle.isOn = false;
+                //something else? 
+            }
+        }
+        
+
+        public void SetOB2Mode(bool active)
+        {
+            if(active)
+            {
+                Debug.Log("Setting Object Mode to OB2");
+                objectMode = ObjectMode.OB2;
+                m_ARKitProjectUI.m_INVToggle.isOn = false;
+                m_ARKitProjectUI.m_DELToggle.isOn = false;
+                m_ARKitProjectUI.m_OB1Toggle.isOn = false;
                 
             }
         }
+
         //Add public void ResetScene() and ResetTrackers()?
 
 
